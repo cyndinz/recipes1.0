@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'recipe.dart';
+import 'recipe_detail.dart';
+
 
 
 void main() {
@@ -10,26 +12,6 @@ class RecipeApp extends StatelessWidget {
   const RecipeApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
-  // @override
-  // Widget build(BuildContext context) {
-  //   return MaterialApp(
-  //     title: 'Flutter Demo',
-  //     theme: ThemeData(
-  //       // This is the theme of your application.
-  //       //
-  //       // Try running your application with "flutter run". You'll see the
-  //       // application has a blue toolbar. Then, without quitting the app, try
-  //       // changing the primarySwatch below to Colors.green and then invoke
-  //       // "hot reload" (press "r" in the console where you ran "flutter run",
-  //       // or simply save your changes to "hot reload" in a Flutter IDE).
-  //       // Notice that the counter didn't reset back to zero; the application
-  //       // is not restarted.
-  //       primarySwatch: Colors.pink,
-  //     ),
-  //     home: const MyHomePage(title: 'Flutter Demo Home Page'),
-  //   );
-  // }
-  // 1
   @override
   Widget build(BuildContext context) {
     // 2
@@ -37,7 +19,7 @@ class RecipeApp extends StatelessWidget {
     // 3
     return MaterialApp(
       // 4
-      title: 'Recipe Calculator',
+      title: 'Recipe Me',
       // 5
       theme: theme.copyWith(
         colorScheme: theme.colorScheme.copyWith(
@@ -46,7 +28,7 @@ class RecipeApp extends StatelessWidget {
         ),
       ),
       // 6
-      home: const MyHomePage(title: 'Recipe Calculator'),
+      home: const MyHomePage(title: 'Recipe Me'),
     );
   }
 }
@@ -87,7 +69,26 @@ class _MyHomePageState extends State<MyHomePage> {
           // 6
           itemBuilder: (BuildContext context, int index) {
             // 7
-            // TODO: Update to return Recipe card
+            return GestureDetector(
+              // 8
+              onTap: () {
+                // 9
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      // 10
+                      return RecipeDetail(recipe: Recipe.samples[index]);
+                      return Text('Detail page');
+                    },
+                  ),
+                );
+              },
+              // 11
+              child: buildRecipeCard(Recipe.samples[index]),
+            );
+
+
             return Text(Recipe.samples[index].label);
           },
         ),
@@ -95,8 +96,38 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-
-// TODO: Add buildRecipeCard() here
+  Widget buildRecipeCard(Recipe recipe) {
+    return Card(
+      // 1
+      elevation: 2.0,
+      // 2
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0)),
+      // 3
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        // 4
+        child: Column(
+          children: <Widget>[
+            Image(image: AssetImage(recipe.imageUrl)),
+            // 5
+            const SizedBox(
+              height: 14.0,
+            ),
+            // 6
+            Text(
+              recipe.label,
+              style: const TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.w700,
+                fontFamily: 'Palatino',
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 
