@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'recipe.dart';
 import 'recipe_detail.dart';
 
-
-
 void main() {
   runApp(const RecipeApp());
 }
@@ -19,7 +17,7 @@ class RecipeApp extends StatelessWidget {
     // 3
     return MaterialApp(
       // 4
-      title: 'Recipe Me',
+      title: 'Recipe YumYum',
       // 5
       theme: theme.copyWith(
         colorScheme: theme.colorScheme.copyWith(
@@ -28,7 +26,7 @@ class RecipeApp extends StatelessWidget {
         ),
       ),
       // 6
-      home: const MyHomePage(title: 'Recipe Me'),
+      home: const MyHomePage(title: 'Recipe YumYum'),
     );
   }
 }
@@ -88,21 +86,19 @@ class _MyHomePageState extends State<MyHomePage> {
               child: buildRecipeCard(Recipe.samples[index]),
             );
 
-
             return Text(Recipe.samples[index].label);
           },
         ),
-
       ),
     );
   }
+
   Widget buildRecipeCard(Recipe recipe) {
     return Card(
       // 1
       elevation: 2.0,
       // 2
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
       // 3
       child: Padding(
         padding: const EdgeInsets.all(16.0),
